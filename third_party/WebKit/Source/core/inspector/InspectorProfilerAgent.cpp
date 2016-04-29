@@ -117,9 +117,10 @@ void InspectorProfilerAgent::setSamplingInterval(ErrorString* error, int interva
     m_v8ProfilerAgent->setSamplingInterval(error, interval);
 }
 
-void InspectorProfilerAgent::start(ErrorString* error)
+void InspectorProfilerAgent::start(ErrorString* error, const bool* disableCrankshaft)
 {
-    m_v8ProfilerAgent->start(error);
+    bool crankshaftDisabled = asBool(disableCrankshaft);
+    m_v8ProfilerAgent->start(error, crankshaftDisabled);
     if (m_client && !*error)
         m_client->profilingStarted();
 }

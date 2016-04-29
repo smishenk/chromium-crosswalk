@@ -29,7 +29,7 @@ public:
     void enable(ErrorString*) override;
     void disable(ErrorString*) override;
     void setSamplingInterval(ErrorString*, int) override;
-    void start(ErrorString*) override;
+    void start(ErrorString*, bool = false) override;
     void stop(ErrorString*, RefPtr<TypeBuilder::Profiler::CPUProfile>&) override;
 
     void consoleProfile(const String& title) override;
@@ -42,7 +42,7 @@ private:
     void stop(ErrorString*, RefPtr<TypeBuilder::Profiler::CPUProfile>*);
     String nextProfileId();
 
-    void startProfiling(const String& title);
+    void startProfiling(const String& title, bool disableCrankshaft = false);
     PassRefPtr<TypeBuilder::Profiler::CPUProfile> stopProfiling(const String& title, bool serialize);
 
     bool isRecording() const;

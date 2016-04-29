@@ -110,7 +110,7 @@ public:
     void enable(ErrorString*) override;
     void disable(ErrorString*) override;
     void setSamplingInterval(ErrorString*, int) override;
-    void start(ErrorString*) override;
+    void start(ErrorString*, const bool* = 0) override;
     void stop(ErrorString*, RefPtr<TypeBuilder::Profiler::CPUProfile>&) override;
 
     void willProcessTask();

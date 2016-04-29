@@ -223,7 +223,7 @@ void V8ProfilerAgentImpl::restore()
     }
 }
 
-void V8ProfilerAgentImpl::start(ErrorString* error)
+void V8ProfilerAgentImpl::start(ErrorString* error, bool disableCrankshaft)
 {
     if (m_recordingCPUProfile)
         return;
@@ -233,7 +233,7 @@ void V8ProfilerAgentImpl::start(ErrorString* error)
     }
     m_recordingCPUProfile = true;
     m_frontendInitiatedProfileId = nextProfileId();
-    startProfiling(m_frontendInitiatedProfileId);
+    startProfiling(m_frontendInitiatedProfileId, disableCrankshaft);
     m_state->setBoolean(ProfilerAgentState::userInitiatedProfiling, true);
 }
 
@@ -265,10 +265,10 @@ String V8ProfilerAgentImpl::nextProfileId()
     return String::number(atomicIncrement(&s_lastProfileId));
 }
 
-void V8ProfilerAgentImpl::startProfiling(const String& title)
+void V8ProfilerAgentImpl::startProfiling(const String& title, bool disableCrankshaft)
 {
     v8::HandleScope handleScope(m_isolate);
-    m_isolate->GetCpuProfiler()->StartProfiling(v8String(m_isolate, title), true);
+    m_isolate->GetCpuProfiler()->StartProfiling(v8String(m_isolate, title), true, disableCrankshaft);
 }
 
 PassRefPtr<TypeBuilder::Profiler::CPUProfile> V8ProfilerAgentImpl::stopProfiling(const String& title, bool serialize)

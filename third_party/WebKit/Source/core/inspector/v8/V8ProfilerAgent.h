@@ -36,7 +36,7 @@ public:
     virtual void enable(ErrorString*) = 0;
     virtual void disable(ErrorString*) = 0;
     virtual void setSamplingInterval(ErrorString*, int) = 0;
-    virtual void start(ErrorString*) = 0;
+    virtual void start(ErrorString*, bool) = 0;
     virtual void stop(ErrorString*, RefPtr<TypeBuilder::Profiler::CPUProfile>&) = 0;
 
     // API for the embedder.

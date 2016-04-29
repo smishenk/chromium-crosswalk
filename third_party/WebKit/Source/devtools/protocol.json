@@ -4192,7 +4192,10 @@
                 "description": "Changes CPU profiler sampling interval. Must be called before CPU profiles recording started."
             },
             {
-                "name": "start"
+                "name": "start",
+                "parameters": [
+                    { "name": "disableCrankshaft", "type": "boolean", "optional": true, "description": "Disables function optimizing during profiling and aborts all previous optimizations." }
+                ]
             },
             {
                 "name": "stop",
